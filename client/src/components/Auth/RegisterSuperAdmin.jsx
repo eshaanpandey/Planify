@@ -19,10 +19,16 @@ const RegisterSuperAdmin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = { ...formData, role: "superadmin" };
-    const response = await dispatch(registerSuperAdmin(payload));
-    if (response.meta.requestStatus === "fulfilled") {
-      const { role } = response.payload.user;
-      if (role === "superadmin") navigate("/superadmin/dashboard");
+    try {
+      const response = await dispatch(registerSuperAdmin(payload)).unwrap();
+      const { role } = response.user;
+      console.log(role);
+  
+      if (role === "superadmin") {
+        navigate("/superadmin/dashboard");
+      }
+    } catch (error) {
+      console.error("Registration failed:", error);
     }
   };
   

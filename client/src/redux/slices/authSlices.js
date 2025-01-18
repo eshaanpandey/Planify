@@ -39,12 +39,13 @@ export const registerAdmin = createAsyncThunk(
     try {
       const payload = { ...data, role: "admin" };
       const response = await authService.registerAdmin(payload);
-      const { data: { user, token } } = response;
-
-      if (!user || !token) {
+      const { user } = response.data;
+      console.log(response.data);
+ 
+      if (!user) {
         throw new Error("Invalid admin registration response");
       }
-      return { user, token };
+      return { user };
     } catch (error) {
     //   console.error("Admin registration failed:", error);
       return rejectWithValue(error.response?.data || "Admin registration failed");
@@ -58,13 +59,12 @@ export const registerSuperAdmin = createAsyncThunk(
     try {
       const payload = { ...data, role: "superadmin" };
       const response = await authService.registerSuperAdmin(payload);
-      const { data: { user, token } } = response;
+      const { user } = response.data;
 
-      if (!user || !token) {
+      if (!user ) {
         throw new Error("Invalid superadmin registration response");
       }
-      return { user, token };
-
+      return { user };
     } catch (error) {
     //   console.error("SuperAdmin registration failed:", error);
       return rejectWithValue(error.response?.data || "SuperAdmin registration failed");
@@ -132,11 +132,9 @@ const authSlice = createSlice({
       })
       .addCase(registerAdmin.fulfilled, (state, action) => {
         state.status.registerAdmin = "succeeded";
-        const { user, token } = action.payload || {};
+        const { user } = action.payload || {};
         state.user = user;
-        state.token = token;
         saveToLocalStorage("user", user);
-        saveToLocalStorage("token", token);
       })
       .addCase(registerAdmin.rejected, (state, action) => {
         state.status.registerAdmin = "failed";
@@ -149,11 +147,9 @@ const authSlice = createSlice({
       })
       .addCase(registerSuperAdmin.fulfilled, (state, action) => {
         state.status.registerSuperAdmin = "succeeded";
-        const { user, token } = action.payload || {};
+        const { user } = action.payload || {};
         state.user = user;
-        state.token = token;
         saveToLocalStorage("user", user);
-        saveToLocalStorage("token", token);
       })
       .addCase(registerSuperAdmin.rejected, (state, action) => {
         state.status.registerSuperAdmin = "failed";

@@ -24,6 +24,7 @@ const RegisterAdmin = () => {
   try {
     const response = await dispatch(registerAdmin(payload)).unwrap();
     const { role } = response.user;
+    console.log(role);
 
     if (role === "admin") {
       navigate("/admin/dashboard");
