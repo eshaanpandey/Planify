@@ -2,6 +2,8 @@
 
 Welcome to Planify, a web application for handling user roles (Super Admin, Admin, and User) with payment integration using Stripe! 🚀
 
+Live site can be accessed at [Planify](https://saasplanify.netlify.app/).
+
 ---
 
 ## 🌟 Features
