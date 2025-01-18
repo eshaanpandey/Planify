@@ -51,7 +51,7 @@ Make sure you have the following installed:
      ```
    - For the frontend:
      ```bash
-     cd ../client
+     cd /client
      npm install
      ```
 
