@@ -39,8 +39,8 @@ Make sure you have the following installed:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-repo/multi-role-management-system.git
-   cd multi-role-management-system
+   git clone https://github.com/eshaanpandey/Planify.git
+   cd Planify
    ```
 
 2. **Install dependencies**:
