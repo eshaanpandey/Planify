@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = '/api/users/';
+const API_URL = 'https://planify-tl08.onrender.com/api/users/';
 
 const getAllUsers = async () => {
     const response = await axios.get(API_URL);

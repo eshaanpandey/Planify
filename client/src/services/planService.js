@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5002/api/plans';
+const API_URL = 'https://planify-tl08.onrender.com/api/plans';
 
 const getAuthToken = () => {
     const token = localStorage.getItem("token");

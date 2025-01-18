@@ -6,7 +6,7 @@ import CartSummary from './CartSummary';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.cartItems) || []; // Ensure it's an empty array if undefined
+  const cartItems = useSelector((state) => state.cart.cartItems) || [];
 
   const handleQuantityChange = (id, quantity) => {
     if (quantity > 0) {

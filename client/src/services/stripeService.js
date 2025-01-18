@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5002/api/payments';
+const API_URL = 'https://planify-tl08.onrender.com/api/payments';
 
 export const createPaymentIntent = async (amount, token) => {
   try {

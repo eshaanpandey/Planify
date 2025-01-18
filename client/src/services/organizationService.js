@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5002/api/organizations';
+const API_URL = 'https://planify-tl08.onrender.com/api/organizations';
 
 const getAllOrganizations = async () => {
   const response = await axios.get(`${API_URL}/`);
