@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/slices/authSlices";
 import { useNavigate, Link } from "react-router-dom";
+import ErrorHandler from "../Shared/ErrorHandler";
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { status } = useSelector((state) => state.auth);
@@ -24,6 +27,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
     try {
       // console.log("Attempting login with:", email, password);
       const result = await dispatch(loginUser({ email, password })).unwrap();
@@ -36,6 +40,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login failed:", error);
+      setError(error?.message || "Login failed. Please try again.");
     }
   };
 
@@ -43,6 +48,7 @@ const Login = () => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-6 bg-white shadow-md rounded-lg">
         <h1 className="text-2xl font-bold mb-4 text-center">Login</h1>
+        {error && <ErrorHandler error={error} />}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"

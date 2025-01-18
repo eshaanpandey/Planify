@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerSuperAdmin } from "../../redux/slices/authSlices";
 import { useNavigate } from "react-router-dom";
+import ErrorHandler from "../Shared/ErrorHandler";
 
 const RegisterSuperAdmin = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ const RegisterSuperAdmin = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState(null);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,6 +32,7 @@ const RegisterSuperAdmin = () => {
       }
     } catch (error) {
       console.error("Registration failed:", error);
+      setError(error?.message || "Login failed. Please try again.");
     }
   };
   
@@ -37,6 +41,7 @@ const RegisterSuperAdmin = () => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-6 bg-white shadow-md rounded-lg">
         <h1 className="text-2xl font-bold mb-4 text-center">Register as SuperAdmin</h1>
+        {error && <ErrorHandler error={error} />}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
