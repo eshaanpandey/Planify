@@ -19,7 +19,7 @@ const Login = () => {
       if (role === "superadmin") navigate("/superadmin/dashboard");
       if (role === "user") navigate("/user/dashboard");
     }
-  }, []);
+  }, [navigate]);
   
 
   const handleSubmit = async (e) => {
