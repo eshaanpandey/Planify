@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { status, user } = useSelector((state) => state.auth);
+  const { status } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");

@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 
 const SuperAdminDashboard = () => {
-  const dispatch = useDispatch();
-
   return (
     <div className="max-w-7xl mx-auto p-6">
       <h2 className="text-3xl font-semibold text-gray-800 mb-6">Super Admin Dashboard</h2>

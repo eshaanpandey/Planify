@@ -9,7 +9,6 @@ const Checkout = () => {
   const elements = useElements();
   const dispatch = useDispatch();
   const { clientSecret, loading, error } = useSelector((state) => state.payment);
-  const user = useSelector((state) => state.auth.user);
 
   const cartItems = useSelector((state) => state.cart.cartItems);
 

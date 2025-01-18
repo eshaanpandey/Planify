@@ -1,5 +1,4 @@
-import React, {useEffect} from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import LandingPage from './pages/LandingPage';
@@ -29,7 +28,6 @@ import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 function App() {
-  const { user } = useSelector((state) => state.auth);
 
   return (
     <Routes>
