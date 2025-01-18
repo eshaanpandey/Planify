@@ -9,8 +9,9 @@ import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", authMiddleware(["admin", "superadmin"]), recordPayment);
-router.get("/", authMiddleware(["superadmin"]), getAllPayments);
+router.post("/", authMiddleware(["admin"]), recordPayment);
+// router.get("/", authMiddleware(["superadmin"]), getAllPayments);
+router.get("/", authMiddleware(["superadmin", "admin"]), getAllPayments);
 router.get("/:id", authMiddleware(["admin", "superadmin"]), getPaymentsByOrganization);
 
 router.post("/webhook", express.raw({ type: "application/json" }), handleStripeWebhook);

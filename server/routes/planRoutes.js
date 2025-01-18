@@ -15,6 +15,6 @@ router.put("/:id", authMiddleware(["superadmin"]), updatePlan);
 router.delete("/:id", authMiddleware(["superadmin"]), deletePlan);
 
 // All roles: Get all plans
-router.get("/", authMiddleware(["superadmin", "admin", "user"]), getAllPlans);
+router.get("/", getAllPlans);
 
 export default router;

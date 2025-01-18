@@ -12,7 +12,7 @@ export const registerSuperAdmin = async (req, res) => {
   try {
     const user = new User({ name, email, password, role: "superadmin" });
     await user.save();
-    res.status(201).json({ message: "Super Admin registered successfully." });
+    res.status(201).json({ message: "Super Admin registered successfully.", user });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -58,7 +58,7 @@ export const registerAdmin = async (req, res) => {
     organization.adminId = user._id;
     await organization.save();
 
-    res.status(201).json({ message: "Admin registered successfully." });
+    res.status(201).json({ message: "Admin registered successfully.", user });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -77,7 +77,8 @@ export const login = async (req, res) => {
 
     const token = generateToken(user);
 
-    res.status(200).json({ token });
+    // console.log("sending info with: ", token, user);
+    res.status(200).json({ token, user });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
