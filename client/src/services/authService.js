@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const API_URL = "http://localhost:5002/api/auth";
-const API_URL = "https://planify-tl08.onrender.com/api/auth";
+const API_URL = "http://localhost:5002/api/auth";
+// const API_URL = "https://planify-tl08.onrender.com/api/auth";
 
 const login = async (credentials) => {
   const response = await axios.post(`${API_URL}/user/login`, credentials);

@@ -39,15 +39,16 @@ export const registerAdmin = createAsyncThunk(
     try {
       const payload = { ...data, role: "admin" };
       const response = await authService.registerAdmin(payload);
-      const { user } = response.data;
-      console.log(response.data);
+      const { user, organizationId, token } = response.data;
+      console.log("response in authSlices: ", response.data);
  
-      if (!user) {
+      if (!user || !organizationId) {
         throw new Error("Invalid admin registration response");
       }
-      return { user };
+
+      return { user, organizationId, token };
     } catch (error) {
-    //   console.error("Admin registration failed:", error);
+      console.error("Admin registration failed:", error);
       return rejectWithValue(error.response?.data || "Admin registration failed");
     }
   }
@@ -77,6 +78,7 @@ const authSlice = createSlice({
   initialState: {
     user: loadFromLocalStorage("user"),
     token: loadFromLocalStorage("token"),
+    organizationId: loadFromLocalStorage("organizationId"),
     status: {
       login: "idle",
       registerAdmin: "idle",
@@ -132,9 +134,13 @@ const authSlice = createSlice({
       })
       .addCase(registerAdmin.fulfilled, (state, action) => {
         state.status.registerAdmin = "succeeded";
-        const { user } = action.payload || {};
+        const { user, organizationId, token } = action.payload || {};
         state.user = user;
+        state.organizationId = organizationId;
+        state.token = token;
         saveToLocalStorage("user", user);
+        saveToLocalStorage("token", token);
+        saveToLocalStorage("organizationId", organizationId);
       })
       .addCase(registerAdmin.rejected, (state, action) => {
         state.status.registerAdmin = "failed";

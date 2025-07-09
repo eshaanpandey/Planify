@@ -12,7 +12,9 @@ export const registerSuperAdmin = async (req, res) => {
   try {
     const user = new User({ name, email, password, role: "superadmin" });
     await user.save();
-    res.status(201).json({ message: "Super Admin registered successfully.", user });
+    res
+      .status(201)
+      .json({ message: "Super Admin registered successfully.", user });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -58,7 +60,17 @@ export const registerAdmin = async (req, res) => {
     organization.adminId = user._id;
     await organization.save();
 
-    res.status(201).json({ message: "Admin registered successfully.", user });
+    const token = generateToken(user);
+    // console.log("tokne in authcontroller: ", token);
+
+    res
+      .status(201)
+      .json({
+        message: "Admin registered successfully.",
+        user,
+        organizationId: organization._id,
+        token: token,
+      });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

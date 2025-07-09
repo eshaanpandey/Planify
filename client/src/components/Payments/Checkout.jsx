@@ -11,6 +11,7 @@ const Checkout = () => {
   const { clientSecret, loading, error } = useSelector((state) => state.payment);
 
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const { organizationId } = useSelector((state) => state.auth);
 
   const totalAmount = cartItems.reduce(
     (total, item) => total + item.pricePerUser * item.quantity,
@@ -18,8 +19,6 @@ const Checkout = () => {
   );
 
   const planId = "678a0496ec21cae4822728a7";
-  // const organizationId = user?.organizationId;
-  const organizationId = "678b28522744324d92ff87af";
   const usersPurchased = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const getAuthToken = () => {
@@ -33,6 +32,7 @@ const Checkout = () => {
         dispatch(setPaymentLoading(true));
         const token = getAuthToken().replace(/['"]+/g, '');
         const secret = await createPaymentIntent(totalAmount, token, planId, organizationId, usersPurchased);
+        console.log("created payment intent");
         dispatch(setPaymentIntent(secret));
       } catch (err) {
         dispatch(setPaymentError('Failed to create payment intent.'));
